@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 )
 
@@ -25,13 +24,11 @@ func ReqeustHandler(w http.ResponseWriter, req *http.Request) {
 		err := json.NewEncoder(w).Encode(dataReturn)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			log.Fatal(err)
 		}
 	case "POST":
 		err := json.NewDecoder(req.Body).Decode(&dataAccept)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			log.Fatal(err)
 		}
 		fmt.Fprintf(w, "The input recieved is=>%+v", dataAccept)
 	default:
